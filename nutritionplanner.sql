@@ -57,6 +57,26 @@ CREATE TABLE `Ingredients` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `Nutrition`
+--
+
+CREATE TABLE `Nutrition` (
+  `Name` varchar(255) NOT NULL,
+  `Calories` int(11) NOT NULL,
+  `Total Fat` int(11) NOT NULL,
+  `Saturated Fat` int(11) NOT NULL
+  
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `Nutrition`
+--
+
+
+-- --------------------------------------------------------
+
+
+--
 -- Table structure for table `Users`
 --
 
