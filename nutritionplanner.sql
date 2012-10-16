@@ -22,18 +22,17 @@ SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 -- --------------------------------------------------------
 
 --
--- Table structure for table `Hoagies`
+-- Table structure for table `Sandwiches`
 --
 
 CREATE TABLE `Sandwiches` (
   `Name` varchar(255) NOT NULL,
   `Description` varchar(255) NOT NULL,
-  `Ingredient` varchar(255) NOT NULL,
   `ImageUrl` varchar(255) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `Hoagies`
+-- Dumping data for table `Sandwiches`
 --
 
 
