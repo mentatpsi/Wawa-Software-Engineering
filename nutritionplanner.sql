@@ -25,7 +25,7 @@ SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 -- Table structure for table `Hoagies`
 --
 
-CREATE TABLE `Hoagies` (
+CREATE TABLE `Sandwiches` (
   `Name` varchar(255) NOT NULL,
   `Description` varchar(255) NOT NULL,
   `Ingredient` varchar(255) NOT NULL,
@@ -40,28 +40,29 @@ CREATE TABLE `Hoagies` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `Ingredients`
+-- Table structure for table `Sandwich_Ingredient`
 --
 
-CREATE TABLE `Ingredients` (
-  `Name` varchar(255) NOT NULL,
-  `ServingSize` int(11) NOT NULL
+CREATE TABLE `Sandwich_Ingredient` (
+  `Sandwich_id` varchar(255) NOT NULL,
+  `Ingredient_id` varchar(255) NOT NULL,
+  `CountNum` int(11) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `Ingredients`
+-- Dumping data for table `Sandwich_Ingredient`
 --
 
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `Nutrition`
+-- Table structure for table `Ingredients`
 --
 
-CREATE TABLE `Nutrition` (
-  `Name` varchar(255) NOT NULL,
-  `ServingSize` varchar(255) NOT NULL,
+CREATE TABLE `Ingredients` (
+  `NameID` varchar(255) NOT NULL,
+  `ServingSize` int(11) NOT NULL,
   `Calories` int(11) NOT NULL,
   `TotalFat` int(11) NOT NULL,
   `SaturatedFat` int(11) NOT NULL,
@@ -70,12 +71,10 @@ CREATE TABLE `Nutrition` (
   `Protein` int(11) NOT NULL,
   `Fiber` int(11) NOT NULL,
   `TransFat` int(11) NOT NULL
-  
-  
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `Nutrition`
+-- Dumping data for table `Ingredients`
 --
 
 
