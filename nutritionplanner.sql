@@ -62,6 +62,7 @@ CREATE TABLE `Sandwich_Ingredient` (
 CREATE TABLE `Ingredients` (
   `NameID` varchar(255) NOT NULL,
   `ServingSize` int(11) NOT NULL,
+  `Category` VarChar(255) NOT NULL,
   `Calories` int(11) NOT NULL,
   `TotalFat` int(11) NOT NULL,
   `SaturatedFat` int(11) NOT NULL,
