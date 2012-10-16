@@ -63,8 +63,13 @@ CREATE TABLE `Ingredients` (
 CREATE TABLE `Nutrition` (
   `Name` varchar(255) NOT NULL,
   `Calories` int(11) NOT NULL,
-  `Total Fat` int(11) NOT NULL,
-  `Saturated Fat` int(11) NOT NULL
+  `TotalFat` int(11) NOT NULL,
+  `SaturatedFat` int(11) NOT NULL,
+  `Carbohydrates` varchar(255) NOT NULL,
+  `Sodium` int(11) NOT NULL,
+  `Protein` int(11) NOT NULL,
+  `Fiber` int(11) NOT NULL,
+  `TransFat` int(11) NOT NULL
   
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
