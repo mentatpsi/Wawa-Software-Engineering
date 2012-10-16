@@ -28,6 +28,7 @@ SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 CREATE TABLE `Hoagies` (
   `Name` varchar(255) NOT NULL,
   `Description` varchar(255) NOT NULL,
+  `Ingredient` varchar(255) NOT NULL,
   `ImageUrl` varchar(255) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
