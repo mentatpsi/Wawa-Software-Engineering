@@ -28,7 +28,6 @@ SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 CREATE TABLE `Hoagies` (
   `Name` varchar(255) NOT NULL,
   `Description` varchar(255) NOT NULL,
-  `Ingredient` varchar(255) NOT NULL,
   `ImageUrl` varchar(255) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
@@ -45,7 +44,6 @@ CREATE TABLE `Hoagies` (
 
 CREATE TABLE `Ingredients` (
   `Name` varchar(255) NOT NULL,
-  `Nutrition` varchar(1024) NOT NULL,
   `ServingSize` int(11) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
@@ -90,7 +88,7 @@ CREATE TABLE `Nutrition` (
 CREATE TABLE `Users` (
   `UserName` varchar(255) NOT NULL,
   `Password` varchar(255) NOT NULL,
-  `Role` set('Guest','Admin','Manger') NOT NULL
+  `Role` set('Guest','Admin','Manager') NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 --
