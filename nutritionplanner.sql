@@ -66,7 +66,7 @@ CREATE TABLE `Nutrition` (
   `Calories` int(11) NOT NULL,
   `TotalFat` int(11) NOT NULL,
   `SaturatedFat` int(11) NOT NULL,
-  `Carbohydrates` varchar(255) NOT NULL,
+  `Carbohydrates` varchar(11) NOT NULL,
   `Sodium` int(11) NOT NULL,
   `Protein` int(11) NOT NULL,
   `Fiber` int(11) NOT NULL,
