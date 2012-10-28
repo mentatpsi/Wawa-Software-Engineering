@@ -82,6 +82,14 @@ public class Nutrition {
 	public setServing(int value) {
 		this.serving = value;
 	}
+	public String createLabel() {
+		String curStr = "";
+		/*return the html / markup that will make the label
+		
+		*//
+		return curStr;
+	
+	}
 	
 	public int[] array;
 	public int calories;
