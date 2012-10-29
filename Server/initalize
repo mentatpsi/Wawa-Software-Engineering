@@ -26,6 +26,8 @@ echo -n "grant all privileges on glassfish_db.* to 'glassfish'@'%';"
 echo -n "Press enter when done"
 read proceed
 
+sudo /etc/init.d/glassfish restart
+
 echo -n "Follow instructions for setting up JDBC Connection Pools"
 
 
