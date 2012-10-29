@@ -14,7 +14,7 @@ public class Food {
 	
 	public boolean inFood(String name) {
 		boolean cur = false;
-		for (ingredient : Ingredients) {
+		for (ingredient : Ingredients) { //Depends on functionality of arraylist, might need conversion to list type
 			if (ingredient == name) {
 				cur = true;
 				break;
