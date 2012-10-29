@@ -26,12 +26,10 @@ Set up in the following manner:
   Terminal 1:
   - Copy files in server folder into home directory under Ubuntu
   - Set chmod 755 to initalize file.
-  - Run sudo ./initalize
-  - This should create a Glassfish environment
-  
-  - Requires set up of MySQL
-  - Requires the commenting out of #bind-address = 127.0.0.1 in the /etc/mysql/my.cnf file
+  - Run sudo ./initalize  
 
+  Terminal 2:
+  - Requires the commenting out of #bind-address = 127.0.0.1 in the /etc/mysql/my.cnf file
   - Requires the creation of glassfish user with "glassfish" password (make sure password works)
   - Requires the creation of the two JDBC Connection Pools (MySQLDataSource, MySQLDataSource)
     - Set up properties can be found in link
