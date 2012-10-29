@@ -24,7 +24,7 @@ Set up in the following manner:
   - Open the website link provided 
   
   Terminal 1:
-  - Copy files in server folder into home directory under Ubuntu
+  - Make cwd the server folder
   - Set chmod 755 to initalize file.
   - Run sudo ./initalize  
 
