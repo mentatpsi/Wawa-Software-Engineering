@@ -20,6 +20,7 @@ public class Food {
 				break;
 			}
 		}
+		return cur;
 	}
 	
 	public void addIngredient(String name) {
