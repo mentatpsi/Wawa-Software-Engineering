@@ -16,7 +16,7 @@ echo -n "Under terminal 2: Please comment out #bind address in /etc/mysql/my.cnf
 read proceed
 
 
-sudo /etc/init.d/mysql restart
+sudo service mysql restart
 
 echo -n "Under terminal 2 please run the following set of commands"
 echo -n "mysql -u root -p"
@@ -26,7 +26,7 @@ echo -n "grant all privileges on glassfish_db.* to 'glassfish'@'%';"
 echo -n "Press enter when done"
 read proceed
 
-sudo /etc/init.d/glassfish restart
+sudo service glassfish restart
 
 echo -n "Follow instructions for setting up JDBC Connection Pools"
 
