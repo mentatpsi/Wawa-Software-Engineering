@@ -19,7 +19,7 @@ Set up in the following manner:
 	- MySQL version 5.5
 	- MySQL-connector-java-5.1.22.zip
  
- Method 2 (using included bash):
+ Method 2 (Not currently working):
   - Open up two terminals (one will run intilaze script, the other requires more user interaction)
   - Open the website link provided 
   
