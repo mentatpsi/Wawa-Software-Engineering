@@ -25,6 +25,8 @@ Set up in the following manner:
   
   Terminal 1:
   - Make cwd the server folder
+  - Create initalize file by copying text into new file. 
+    (at current there are issues with encoding)
   - Set chmod 755 to initalize file.
   - Run sudo ./initalize  
 
