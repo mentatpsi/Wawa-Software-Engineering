@@ -1,0 +1,21 @@
+#!/bin/bash
+
+GLASSFISH_HOME=/opt/glassfish3
+case "$1" in
+start)
+    ${GLASSFISH_HOME}/bin/asadmin start-domain domain1
+    ;;
+stop)
+    ${GLASSFISH_HOME}/bin/asadmin stop-domain domain1
+    ;;
+restart)
+    ${GLASSFISH_HOME}/bin/asadmin stop-domain domain1
+    ${GLASSFISH_HOME}/bin/asadmin start-domain domain1
+    ;;
+*)
+    echo "usage: $0 {start|stop|restart}"
+    ;;
+
+esac
+
+exit 0

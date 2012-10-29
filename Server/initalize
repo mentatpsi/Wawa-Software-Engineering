@@ -1,0 +1,36 @@
+#!/bin/bash
+
+sudo apt-get install openjdk-7-jdk
+sudo apt-get install unzip
+wget http://download.java.net/glassfish/3.1.2/release/glassfish-3.1.2.zip
+sudo unzip glassfish-3.1.2.zip -d /opt
+
+sudo apt-get install mysql-server-5.5
+sudo cp opt /opt
+sudo cp etc /etc
+
+sudo chmod 755 /etc/init.d/glassfish
+sudo update-rc.d /etc/init.d/glassfish defaults
+
+echo -n "Under terminal 2: Please comment out #bind address in /etc/mysql/my.cnf and then press [ENTER]: "
+read proceed
+
+
+sudo /etc/init.d/mysql restart
+
+echo -n "Under terminal 2 please run the following set of commands"
+echo -n "mysql -u root -p"
+echo -n "create database glassfish_db;"
+echo -n "grant usage on *.* to 'glassfish'@'%' identified by 'glassfish';"
+echo -n "grant all privileges on glassfish_db.* to 'glassfish'@'%';"
+echo -n "Press enter when done"
+read proceed
+
+echo -n "Follow instructions for setting up JDBC Connection Pools"
+
+
+
+
+
+
+
