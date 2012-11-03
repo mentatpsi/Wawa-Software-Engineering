@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+
+<STYLE type="text/css">
+<!--
+html,body {
+        padding:0;
+        margin:auto;
+        height:100%;
+        min-height:100%;
+        align:center;  
+        width: 95%;   
+}
+
+.items {
+       background-color:tan;
+       width:33%;
+       height:75%;
+       float:left; 
+    
+}
+create {
+        background-color:green; 
+        width:33%; 
+        height:25%; 
+        float:left    
+}
+.buttonbox {
+        height:20%; 
+        width:280px; 
+        background-color:#F0F0F0 ; 
+        margin:auto ; 
+        padding : 4px;
+        border : solid 4px #E0E0E0;        
+}
+   -->
+</STYLE>
+
+<html>
+    
+<body>
+<div type="items"style="background-color:tan; width:33%; height:75%; float:left" align="middle">
+<br>
+<button type="button" onclick="alert('Food Action')">Food</button>
+<button type="button" onclick="alert('User Action')">User</button>
+
+<form method="POST" action="nothing" >
+    Select food item : <br>
+    
+<select style= "min-width:100px;width:60% " name="FOODS" size="12">
+<option disabled>Cheeses</option>
+<option value="American">-American</option>
+
+<option disabled>Meats</option>
+<option value="Bologna">-Bologna</option>
+
+</select>
+    </br>
+<button type="button" onclick="alert('Load table')">Load</button>
+
+</div>
+ 
+
+    
+<div style="background-color:white; width:67%; height:100%; float:right">
+
+        <!--NUTRITION INFORMATION-->
+        <br>
+        <div style="height:25%; min-width:280px; width:60%; background-color:#F0F0F0  ; padding: 4px; border : solid 4px #E0E0E0 ;  margin:auto  ">
+        
+        Ingredient Name
+        <br>
+        ID #
+        <br>
+        Status: "Enable/Disabled"
+        </div>
+        
+        
+        <!--CHECKBOXES-->
+        <div style="border : solid 4px #E0E0E0 ; background : #F0F0F0 ; padding : 4px; bottom:-33px;  min-width:280px; width:60%; height : 25%; overflow : auto; margin:auto">
+            
+		<input type="checkbox" name="Cal" unchecked> Calories <input type="text" name="lastname"style="width: 50%; float:right"><br>
+    
+		<input type="checkbox" name="option2"  unchecked> Calories from Fat<input type="text" name="lastname"style="width: 50%; float:right"><br>
+    
+		<input type="checkbox" name="option2" unchecked> Total Fat <input type="text" name="lastname"style="width: 50%; float:right"><br>
+    
+		<input type="checkbox" name="option2" unchecked> Sodium <input type="text" name="lastname"style="width: 50%; float:right"><br>
+    
+		<input type="checkbox" name="option2" unchecked> Total Carbs <input type="text" name="lastname"style="width: 50%; float:right"><br>
+    
+		<input type="checkbox" name="option2"  unchecked> Protein <input type="text" name="lastname"style="width: 50%; float:right"><br>
+		
+		<input type="checkbox" name="option2" unchecked> Butter <input type="text" name="lastname"style="width: 50%; float:right"><br>  
+
+            
+        </div>
+        
+        
+        <!--BUTTONS-->
+        <div style="height:20%;  min-width:280px; width:60%; background-color:#F0F0F0 ; margin:auto ; padding : 4px;border : solid 4px #E0E0E0 ; margin-left:auto;margin-right:auto">
+         <br>
+        <button type="button" onclick="alert('enable')"> ENABLE</button>
+        <button type="button" onclick="alert('saved')">Apply</button>
+        <button type="button" onclick="alert('disabled')">DISABLE</button>          
+        </div>   
+
+        
+    
+</div>
+    
+<create>
+    
+Name: 
+<input type="text" name="firstname" style="width: 50%; float:right; margin: 5px" ><br><br>
+Category: 
+<input type="text" name="lastname"style="width: 50%; float:right; margin:5px">
+    
+<button type="button"  onclick="alert('Food Action')" style="display: block;width: 100px;margin: 10px auto;">Create</button>
+
+</create>
+    
+</body>
+</html>
+?
