@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 50.63.244.74
--- Generation Time: Nov 12, 2012 at 09:28 AM
+-- Generation Time: Nov 12, 2012 at 10:20 AM
 -- Server version: 5.0.92
 -- PHP Version: 5.1.6
 
@@ -132,6 +132,23 @@ INSERT INTO `Sandwiches` VALUES('Italian', '', '');
 -- --------------------------------------------------------
 
 --
+-- Stand-in structure for view `SandwichNutrition`
+--
+CREATE TABLE `SandwichNutrition` (
+`Sandwich_id` varchar(255)
+,`ServingSize` int(11)
+,`SUM(  ``Calories`` )` decimal(32,0)
+,`SUM(  ``TotalFat`` )` decimal(32,0)
+,`SUM(  ``SaturatedFat`` )` decimal(32,0)
+,`SUM(  ``Carbohydrates`` )` double
+,`SUM(  ``Sodium`` )` decimal(32,0)
+,`SUM(  ``Protein`` )` decimal(32,0)
+,`SUM(  ``Fiber`` )` decimal(32,0)
+,`SUM(  ``TransFat`` )` decimal(32,0)
+);
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `Sandwich_Ingredient`
 --
 
@@ -200,3 +217,12 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`nutritionplanner`@`%` SQL SECURITY DEFINER V
 DROP TABLE IF EXISTS `Nutrition1`;
 
 CREATE ALGORITHM=UNDEFINED DEFINER=`nutritionplanner`@`%` SQL SECURITY DEFINER VIEW `nutritionplanner`.`Nutrition1` AS select `Nutrition`.`Sandwich_id` AS `Sandwich_id`,`Nutrition`.`NameID` AS `NameID`,`Nutrition`.`ServingSize` AS `ServingSize`,`Nutrition`.`Category` AS `Category`,`Nutrition`.`Calories` AS `Calories`,`Nutrition`.`TotalFat` AS `TotalFat`,`Nutrition`.`SaturatedFat` AS `SaturatedFat`,`Nutrition`.`Carbohydrates` AS `Carbohydrates`,`Nutrition`.`Sodium` AS `Sodium`,`Nutrition`.`Protein` AS `Protein`,`Nutrition`.`Fiber` AS `Fiber`,`Nutrition`.`TransFat` AS `TransFat` from `nutritionplanner`.`Nutrition` group by `Nutrition`.`Sandwich_id`,`Nutrition`.`NameID`;
+
+-- --------------------------------------------------------
+
+--
+-- Structure for view `SandwichNutrition`
+--
+DROP TABLE IF EXISTS `SandwichNutrition`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`nutritionplanner`@`%` SQL SECURITY DEFINER VIEW `nutritionplanner`.`SandwichNutrition` AS select `Nutrition1`.`Sandwich_id` AS `Sandwich_id`,`Nutrition1`.`ServingSize` AS `ServingSize`,sum(`Nutrition1`.`Calories`) AS `SUM(  ``Calories`` )`,sum(`Nutrition1`.`TotalFat`) AS `SUM(  ``TotalFat`` )`,sum(`Nutrition1`.`SaturatedFat`) AS `SUM(  ``SaturatedFat`` )`,sum(`Nutrition1`.`Carbohydrates`) AS `SUM(  ``Carbohydrates`` )`,sum(`Nutrition1`.`Sodium`) AS `SUM(  ``Sodium`` )`,sum(`Nutrition1`.`Protein`) AS `SUM(  ``Protein`` )`,sum(`Nutrition1`.`Fiber`) AS `SUM(  ``Fiber`` )`,sum(`Nutrition1`.`TransFat`) AS `SUM(  ``TransFat`` )` from `nutritionplanner`.`Nutrition1` group by `Nutrition1`.`Sandwich_id`;
