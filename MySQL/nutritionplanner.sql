@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 50.63.244.74
--- Generation Time: Nov 12, 2012 at 09:08 AM
+-- Generation Time: Nov 12, 2012 at 09:28 AM
 -- Server version: 5.0.92
 -- PHP Version: 5.1.6
 
@@ -61,6 +61,25 @@ CREATE TABLE `Italian` (
 --
 CREATE TABLE `ItalianNutrition` (
 `Ingredient_id` varchar(255)
+,`NameID` varchar(255)
+,`ServingSize` int(11)
+,`Category` varchar(255)
+,`Calories` int(11)
+,`TotalFat` int(11)
+,`SaturatedFat` int(11)
+,`Carbohydrates` varchar(11)
+,`Sodium` int(11)
+,`Protein` int(11)
+,`Fiber` int(11)
+,`TransFat` int(11)
+);
+-- --------------------------------------------------------
+
+--
+-- Stand-in structure for view `Nutrition`
+--
+CREATE TABLE `Nutrition` (
+`Sandwich_id` varchar(255)
 ,`NameID` varchar(255)
 ,`ServingSize` int(11)
 ,`Category` varchar(255)
@@ -167,8 +186,17 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`nutritionplanner`@`%` SQL SECURITY DEFINER V
 -- --------------------------------------------------------
 
 --
+-- Structure for view `Nutrition`
+--
+DROP TABLE IF EXISTS `Nutrition`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`nutritionplanner`@`%` SQL SECURITY DEFINER VIEW `nutritionplanner`.`Nutrition` AS select `SI`.`Sandwich_id` AS `Sandwich_id`,`Ingr`.`NameID` AS `NameID`,`Ingr`.`ServingSize` AS `ServingSize`,`Ingr`.`Category` AS `Category`,`Ingr`.`Calories` AS `Calories`,`Ingr`.`TotalFat` AS `TotalFat`,`Ingr`.`SaturatedFat` AS `SaturatedFat`,`Ingr`.`Carbohydrates` AS `Carbohydrates`,`Ingr`.`Sodium` AS `Sodium`,`Ingr`.`Protein` AS `Protein`,`Ingr`.`Fiber` AS `Fiber`,`Ingr`.`TransFat` AS `TransFat` from ((`nutritionplanner`.`Sandwich_Ingredient` `SI` join `nutritionplanner`.`Ingredients` `Ingr`) join `nutritionplanner`.`Ingredients` on((`SI`.`Ingredient_id` = `Ingr`.`NameID`))) order by `SI`.`Sandwich_id`;
+
+-- --------------------------------------------------------
+
+--
 -- Structure for view `Nutrition1`
 --
 DROP TABLE IF EXISTS `Nutrition1`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`nutritionplanner`@`%` SQL SECURITY DEFINER VIEW `nutritionplanner`.`Nutrition1` AS select `SI`.`Sandwich_id` AS `Sandwich_id`,`Ingr`.`NameID` AS `NameID`,`Ingr`.`ServingSize` AS `ServingSize`,`Ingr`.`Category` AS `Category`,`Ingr`.`Calories` AS `Calories`,`Ingr`.`TotalFat` AS `TotalFat`,`Ingr`.`SaturatedFat` AS `SaturatedFat`,`Ingr`.`Carbohydrates` AS `Carbohydrates`,`Ingr`.`Sodium` AS `Sodium`,`Ingr`.`Protein` AS `Protein`,`Ingr`.`Fiber` AS `Fiber`,`Ingr`.`TransFat` AS `TransFat` from ((`nutritionplanner`.`Sandwich_Ingredient` `SI` join `nutritionplanner`.`Ingredients` `Ingr`) join `nutritionplanner`.`Ingredients` on((`SI`.`Ingredient_id` = `Ingr`.`NameID`))) order by `SI`.`Sandwich_id`;
+CREATE ALGORITHM=UNDEFINED DEFINER=`nutritionplanner`@`%` SQL SECURITY DEFINER VIEW `nutritionplanner`.`Nutrition1` AS select `Nutrition`.`Sandwich_id` AS `Sandwich_id`,`Nutrition`.`NameID` AS `NameID`,`Nutrition`.`ServingSize` AS `ServingSize`,`Nutrition`.`Category` AS `Category`,`Nutrition`.`Calories` AS `Calories`,`Nutrition`.`TotalFat` AS `TotalFat`,`Nutrition`.`SaturatedFat` AS `SaturatedFat`,`Nutrition`.`Carbohydrates` AS `Carbohydrates`,`Nutrition`.`Sodium` AS `Sodium`,`Nutrition`.`Protein` AS `Protein`,`Nutrition`.`Fiber` AS `Fiber`,`Nutrition`.`TransFat` AS `TransFat` from `nutritionplanner`.`Nutrition` group by `Nutrition`.`Sandwich_id`,`Nutrition`.`NameID`;
