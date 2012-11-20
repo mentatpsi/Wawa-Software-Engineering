@@ -12,6 +12,7 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <h1>Hello World!</h1>
+        <span><a href="hoagie.jsp"><img src ="img/hoagie.jpg" height="200px" width="400px"></a> </span>
+        <span><a href="snacks.jsp"><img src="img/soft_drinks.jpg"</span></a>
     </body>
 </html>
