@@ -25,7 +25,7 @@ public class HoagieDao {
     // Retrieves all the hoagie types:
     public List<Hoagie> getHoagieTypes() {
         TypedQuery<Hoagie> query = em.createQuery(
-            "SELECT h FROM Hoagie g ORDER BY g.id", Hoagie.class);
+            "SELECT h.name FROM Hoagie h ORDER BY h.id", Hoagie.class);
         return query.getResultList();
     }
 

@@ -23,8 +23,6 @@ public class Hoagie implements Serializable {
             chol, sodium, carb, fiber, sugars, protein, vitA,
             vitC, calcium, iron = 0;
  
-    
- 
     // Constructors:
     public Hoagie() {
     }
@@ -103,6 +101,8 @@ public class Hoagie implements Serializable {
     // String Representation:
     @Override
     public String toString() {
-        return name + " (signed on " + signingDate + ")";
+        return name + "<br/>" + 
+                "Calories:" + cal + "<br/>" +
+                "Fat Calories" + fatCal + "<br/>";
     }
 }

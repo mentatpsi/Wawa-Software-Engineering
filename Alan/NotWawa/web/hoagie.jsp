@@ -6,10 +6,7 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-
-<jsp:useBean id="hoagieDB" class="hoagie.Hoagie" scope="page" >
-  <jsp:setProperty name="bookDB" property="database" value="${bookDBAO}" />
-</jsp:useBean>
+<%@page import="java.util.*,hoagie.Hoagie"%>
 
 <html>
     <head>
