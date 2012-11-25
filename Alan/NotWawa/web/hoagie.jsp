@@ -1,19 +1,30 @@
-<%-- 
-    Document   : hoagie
-    Created on : Nov 19, 2012, 8:12:46 PM
-    Author     : Alan
---%>
-
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
-<!DOCTYPE html>
+<%@page contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
 <%@page import="java.util.*,hoagie.Hoagie"%>
-
+ 
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+    "http://www.w3.org/TR/html4/loose.dtd">
+ 
 <html>
     <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title>JPA Guest Book Web Application Tutorial</title>
     </head>
+ 
     <body>
-        <h1>Hello World!</h1>
-    </body>
-</html>
+        <form method="POST" action="hoagie">
+            Name: <input type="text" name="name" />
+            <input type="submit" value="Add" />
+        </form>
+ 
+        <hr><ol> <%
+            @SuppressWarnings("unchecked") 
+            List<Hoagie> hoagies = (List<Hoagie>)request.getAttribute("hoagies");
+            if (hoagies != null) {
+                for (Hoagie hoagie : hoagies) { %>
+                    <li> <%=hoagie %> </li> <%
+                }
+            } %>
+        </ol><hr>
+ 
+     
+     </body>
+ </html>

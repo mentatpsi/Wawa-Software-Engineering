@@ -1,32 +1,31 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package hoagie;
  
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
- 
 
-@Stateless
+
+
 public class HoagieDao {
-
     // Injected database connection:
     @PersistenceContext private EntityManager em;
-    
+
+ 
     // Stores a new guest: 
     public void persist(Hoagie hoagie) {
+        //em.getTransaction().begin();
         em.persist(hoagie);
+        //em.getTransaction().commit();
     }
-    
-    // Retrieves all the hoagie types:
-    public List<Hoagie> getHoagieTypes() {
+ 
+    // Retrieves all the guests:
+    public List<Hoagie> getAllHoagies() {
         TypedQuery<Hoagie> query = em.createQuery(
-            "SELECT h.name FROM Hoagie h ORDER BY h.id", Hoagie.class);
+            "SELECT h FROM Hoagie h ORDER BY h.id", Hoagie.class);
         return query.getResultList();
     }
-
 }
