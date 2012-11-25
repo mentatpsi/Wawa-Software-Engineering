@@ -9,7 +9,7 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 
 
-
+@Stateless
 public class HoagieDao {
     // Injected database connection:
     @PersistenceContext private EntityManager em;
