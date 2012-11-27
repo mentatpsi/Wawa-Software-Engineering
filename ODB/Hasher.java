@@ -4,10 +4,7 @@
  */
 package wawafoods;
 
-/**
- *
- * @author Shay
- */
+
 import java.math.BigInteger;
 import java.security.spec.KeySpec;
 import java.util.HashMap;

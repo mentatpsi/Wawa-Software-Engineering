@@ -12,10 +12,7 @@ import javax.persistence.Persistence;
 import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 
-/**
- *
- * @author Shay
- */
+
 public class HashTest {
 
     /**

@@ -4,10 +4,7 @@
  */
 package wawafoods;
 
-/**
- *
- * @author Shay
- */
+
 import java.io.Serializable;
 import javax.persistence.*;
  
