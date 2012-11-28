@@ -12,6 +12,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 
 @WebServlet("/EncryptServlet")
@@ -56,30 +57,50 @@ public class EncryptServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
+        // debugging - write to screen
         response.setContentType("text/html");
         PrintWriter out = response.getWriter();
         
+        // Define vars
         String password;
         String process;
         String user;
         
-        
-        //get user
-        user = request.getParameter("user");
-        //get password
-        password = request.getParameter("password");
-        //get method to process (check / persist to db)
-        process = request.getParameter("process");
-        // set default message
+        // set default response message
         request.setAttribute("Message", "Please enter a user and password" );
         
+        /********************************/
+        /* Get the passed-in parameters */
+        /********************************/
+        user = request.getParameter("user");            //get user
+        password = request.getParameter("password");    //get password
+        process = request.getParameter("process");      //get method to process
+       
         // encrypt the password
         StringBuilder sb = encrypt(password);
 
-        // process the request
+        /*******************************/
+        /* Handle session              */
+        /*******************************/
+        //get session if exists, if it doesn't exist, don't create just yet
+        HttpSession session = request.getSession(false); 
+        if (null == session){ // no session exists
+            session = request.getSession(true);         //create session
+            session.setAttribute("USER", user);         //set USER
+            session.setAttribute("LOGIN", false);       //not logged in yet
+        } 
+        
+        // get session vars
+        String sId = session.getId();                  
+
+ 
+        /***********************/
+        /* process the request */
+        /***********************/
         if (process.equals("store")){
             //check to see if user already exists
-            if (hoagieDao.verifyUserExists(user)){
+            boolean userExists = hoagieDao.verifyUserExists(user);
+            if (userExists){
                 request.setAttribute("Message", "Username already taken." );
                 request.getRequestDispatcher("/addUser.jsp").forward(request, response);
             }
@@ -88,21 +109,26 @@ public class EncryptServlet extends HttpServlet {
             Password pass;
             pass = new Password(user, sb.toString());
             hoagieDao.persistUserPass(pass);
+            request.setAttribute("Message", "User" + user + " added Successfully!" );
             
-            request.setAttribute("Message", "User" + user + " added Successfully!" );           
         } else if(process.equals("login")){
-            //make sure user exists in db
+            //verify user exists, else return to login
             if (! hoagieDao.verifyUserExists(user)){
                 request.setAttribute("Message", "User does NOT exist!" );
                 request.getRequestDispatcher("/login.jsp").forward(request, response);
             }
-            //verify password
+            
+            //verify password, else return to login
             StringBuilder check;
             check = hoagieDao.getUserPass(user, sb);
             if (check.toString().equals(sb.toString())){
-                request.setAttribute("Message", "User" + user + " exists!" );
+                // user and pass correct, redirect to admin page
+                session.setAttribute("LOGIN", true);       //set login session to true
+                request.getRequestDispatcher("/admin.jsp").forward(request, response);
             } else{
+                // wrong password, send back to login screen
                 request.setAttribute("Message", "Wrong Password!" );
+                request.getRequestDispatcher("/login.jsp").forward(request, response);
             }  
         }
         

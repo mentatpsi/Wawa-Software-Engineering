@@ -20,6 +20,7 @@
                 </colgroup>
                 <tr><td>UserName</td> <td><input type="text" name="user"></td></tr>
                 <tr><td>Password</td> <td><input type="password" name="password"></td></tr>
+                <tr colspan ="2"><td><input type="hidden" name="process" value="store" /></td></tr>
                 <tr colspan ="2"><td><input type="submit" value="Add" /></td></tr>
             </table>
         </form>

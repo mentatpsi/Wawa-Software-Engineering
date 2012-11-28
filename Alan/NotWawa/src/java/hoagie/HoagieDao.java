@@ -49,7 +49,7 @@ public class HoagieDao {
         return query.getResultList();
     }
     
-    // Retrieves all the ingredients:
+    // Retrieves users password, returns StringBuilder
     public StringBuilder getUserPass(String u, StringBuilder p) {
         Query query = em.createQuery(
             "SELECT p.password FROM Password p WHERE p.userName = :u", String.class);
@@ -57,12 +57,11 @@ public class HoagieDao {
         return c;
     }
     
-    // Retrieves all the ingredients:
+    // verifies user exists in db, returns boolean 
     public boolean verifyUserExists(String u) {
         Query query = em.createQuery(
-            "SELECT p.userName FROM Password AS p WHERE p.userName == :u", Password.class);
+            "SELECT p.userName FROM Password p", Password.class);
         List<Password> elementList = query.getResultList();
-        return elementList.isEmpty();
+        return elementList.isEmpty();  //boolean
     }
-    
 }
