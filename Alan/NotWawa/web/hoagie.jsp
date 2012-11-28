@@ -14,16 +14,16 @@
             Name: <input type="text" name="name" />
             <input type="submit" value="Add" />
         </form>
- 
- <hr><ol> <%
+        <hr><ol> <%
             @SuppressWarnings("unchecked") 
-            List<Guest> guests = (List<Guest>)request.getAttribute("guests");
-            if (guests != null) {
-                for (Guest guest : guests) { %>
-                    <li> <%= guest %> </li> <%
+            List<Hoagie> hoagies = (List<Hoagie>)request.getAttribute("hoagies");
+            if (hoagies != null) {
+                for (Hoagie hoagie : hoagies) { %>
+                    <li> <%= hoagie %> </li> <%
                 }
             } %>
         </ol><hr>
+ 
      
      </body>
  </html>

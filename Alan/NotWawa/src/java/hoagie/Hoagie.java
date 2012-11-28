@@ -15,6 +15,7 @@ public class Hoagie implements Serializable {
     @Id @GeneratedValue(strategy=GenerationType.AUTO) long id;
     private String name;
     private Date signingDate;
+    private String hoagieSize;
  
     // Constructors:
     public Hoagie() {
@@ -23,11 +24,12 @@ public class Hoagie implements Serializable {
     public Hoagie(String name) {
         this.name = name;
         this.signingDate = new Date(System.currentTimeMillis());
+        this.hoagieSize = "Large";
     }
  
     // String Representation:
     @Override
     public String toString() {
-        return name + " (signed on " + signingDate + ")";
+        return name + hoagieSize + signingDate;
     }
 }

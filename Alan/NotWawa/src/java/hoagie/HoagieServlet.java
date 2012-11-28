@@ -2,6 +2,7 @@ package hoagie;
  
 import java.io.IOException;
 import javax.ejb.EJB;
+import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -20,8 +21,8 @@ public class HoagieServlet extends HttpServlet {
         HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
  
-        // Display the list of guests:
-        //request.setAttribute("hoagies", hoagieDao.getAllHoagies());
+        // Display the list of hoagies:
+        request.setAttribute("hoagies", hoagieDao.getAllHoagies());
         request.getRequestDispatcher("/hoagie.jsp").forward(request, response);
     }
  
@@ -30,7 +31,7 @@ public class HoagieServlet extends HttpServlet {
         HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
  
-        // Handle a new guest:
+        // Handle a new hoagie:
         String name = request.getParameter("name");
         if (name != null)
             hoagieDao.persist(new Hoagie(name));
