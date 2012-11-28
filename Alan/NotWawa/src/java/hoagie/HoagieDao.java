@@ -45,7 +45,7 @@ public class HoagieDao {
     // Retrieves all the ingredients:
     public List<HoagieIngredients> getAllIngredients() {
         TypedQuery<HoagieIngredients> query = em.createQuery(
-            "SELECT i FROM HoagieIngredients i ORDER BY i.id", HoagieIngredients.class);
+            "SELECT g FROM HoagieIngredients g", HoagieIngredients.class);
         return query.getResultList();
     }
     

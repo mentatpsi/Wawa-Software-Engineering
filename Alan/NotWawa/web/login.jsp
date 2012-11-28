@@ -1,6 +1,13 @@
 <%@page contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
 <%@page import="java.util.*,hoagie.Password"%>
- 
+
+<% Boolean loggedin = (Boolean)session.getAttribute("LOGIN");  
+    if(loggedin){
+        
+    }
+%>
+
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
     "http://www.w3.org/TR/html4/loose.dtd">
 
@@ -11,6 +18,7 @@
         <title>Not Wawa Login</title>
     </head>
     <body>
+        
         <h1>Login</h1>
         <form method="POST" action="EncryptServlet">
             <table border="0">

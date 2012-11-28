@@ -218,20 +218,27 @@ public class HoagieIngredients implements Serializable {
 
     @Override
     public String toString() {
-        return "Name:" + name + "<br/>" +
-               "Calories: " + calories + "<br/>" +
-                "Fat Calories: " + caloriesFat + "<br/>" +
-                "Total Fat(g): " + totalFat + "<br/>" +
-                "Saturated Fat(g): " + satFat + "<br/>" +
-                "Polyunsaturated Fat(g): " + polyFat + "<br/>" +
-                "Trans Fat(g): " + transFat + "<br/>" +
-                "Cholesterol(g: " + cholesterol + "<br/>" +
-                "Sodium(mg): " + sodium + "<br/>" +
-                "Potassium(mg): " + potassium + "<br/>" +
-                "Carbs(g): " + carbs + "<br/>" +
-                "Fiber(g): " + fiber + "<br/>" +
-                "Sugars(g): " + sugars + "<br/>" +
-                "Protein(g): " + protein + "<br/>";
+        return " <table border=\"0\"\n> "
+                + "<colgroup>\n" +
+                    "<col span=\"1\" style=\" width: 150px;\"\n>" +
+                    "<col span=\"1\" style=\" width: 150px;\"\n>" +
+                "</colgroup>\n" +
+                "<tr><td> Name: </td><td>" + name + "</td></tr>\n" +
+                "<tr><td> Calories: </td><td>" + calories + "</td></tr>\n" +
+                "<tr><td> Fat Calories: </td><td>" + caloriesFat + "</td></tr>\n" +
+                "<tr><td> Total Fat(g): </td><td>" + totalFat + "</td></tr>\n" +
+                "<tr><td> Saturated Fat(g): </td><td>" + satFat + "</td></tr>\n" +
+                "<tr><td> Polyunsaturated Fat(g): </td><td>" + polyFat + "</td></tr>\n" +
+                "<tr><td> Trans Fat(g): </td><td>" + transFat + "</td></tr>\n" +
+                "<tr><td> Cholesterol(g): </td><td>" + cholesterol + "</td></tr>\n" +
+                "<tr><td> Sodium(mg): </td><td>" + sodium + "</td></tr>\n" +
+                "<tr><td> Potassium(mg): </td><td>" + potassium + "</td></tr>\n" +
+                "<tr><td> Carbs(g): </td><td>" + carbs + "</td></tr>\n" +
+                "<tr><td> Fiber(g): </td><td>" + fiber + "</td></tr>\n" +
+                "<tr><td> Sugars(g): </td><td>" + sugars + "</td></tr>\n" +
+                "<tr><td> Protein(g): </td><td>" + protein + "</td></tr>\n" +
+                "</table>\n";
+
     }
     
 }

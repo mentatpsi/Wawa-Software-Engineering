@@ -9,7 +9,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
  
-@WebServlet("/hoagie")
+/**
+ *
+ * @author Alan
+ */
+@WebServlet(name="HoagieServlet", urlPatterns="/add_hoagie")
 public class HoagieServlet extends HttpServlet {
   private static final long serialVersionUID = 1L;
  
@@ -23,7 +27,7 @@ public class HoagieServlet extends HttpServlet {
  
         // Display the list of hoagies:
         request.setAttribute("hoagies", hoagieDao.getAllHoagies());
-        request.getRequestDispatcher("/hoagie.jsp").forward(request, response);
+        request.getRequestDispatcher("/add_hoagie.jsp").forward(request, response);
     }
  
     @Override

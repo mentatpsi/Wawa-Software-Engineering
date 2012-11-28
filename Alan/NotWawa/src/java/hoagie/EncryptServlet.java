@@ -15,7 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 
-@WebServlet("/EncryptServlet")
+@WebServlet(name = "EncryptServlet", urlPatterns="/addUser")
 public class EncryptServlet extends HttpServlet {
 
     // Injected DAO EJB:

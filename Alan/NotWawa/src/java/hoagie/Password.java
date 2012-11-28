@@ -18,12 +18,23 @@ public class Password implements Serializable{
     private Long id;
     String userName;
     String password;
+    Integer attempts;  //unsuccessful login attempts
+
+    
+    // Setters
+    public void setAttempts(Integer attempts) {
+        this.attempts = attempts;
+    }
 
     //getters
     public String getPassword() {
         return password;
     }
 
+    public Integer getAttempts() {
+        return attempts;
+    }
+    
     public Long getId() {
         return id;
     }
@@ -38,7 +49,8 @@ public class Password implements Serializable{
 
     public Password(String userName, String pass) {
         this.userName = userName;
-        this.password = pass; 
+        this.password = pass;
+        this.attempts = 0;
     }
     
 }

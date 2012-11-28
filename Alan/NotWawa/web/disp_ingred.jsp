@@ -10,16 +10,20 @@
         <title>JSP Page</title>
     </head>
     <body>
-     <hr><ol> <%
+        
+        <form method="POST" action="disp_ingred">
+            <input type="submit" value="Display Ingredients" />
+        </form>
+              <hr><ol> <%
             @SuppressWarnings("unchecked") 
-            List<HoagieIngredients> ingredients = (List<HoagieIngredients>)request.getAttribute("ingredients");
+            List<HoagieIngredients> ingredients;
+            ingredients = (List<HoagieIngredients>)request.getAttribute("ingredients");
             if (ingredients != null) {
                 for (HoagieIngredients ingredient : ingredients) { %>
-                    <li> <%= ingredient %> </li> <%
-                }
+                    <%=ingredient%>
+                    <% }
             } %>
-        </ol><hr>
+         
     </body>
-    
- 
+   
 </html>

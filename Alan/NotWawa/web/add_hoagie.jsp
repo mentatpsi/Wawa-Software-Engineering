@@ -6,11 +6,11 @@
  
 <html>
     <head>
-        <title>JPA Guest Book Web Application Tutorial</title>
+        <title>Add a Hoagie</title>
     </head>
  
     <body>
-        <form method="POST" action="hoagie">
+        <form method="POST" action="add_hoagie">
             Name: <input type="text" name="name" />
             <input type="submit" value="Add" />
         </form>

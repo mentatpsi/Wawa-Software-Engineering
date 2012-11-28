@@ -11,7 +11,7 @@
     </head>
     <body>
         <h2>Add Ingredients</h2>
-        <form method="POST" action="add_ingredients">
+        <form method="POST" action="add_ingred">
             <table border="0">
                 <colgroup>
                     <col span="1" style=" width: 150px;">

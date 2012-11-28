@@ -16,11 +16,11 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Alan
  */
-@WebServlet("/add_ingredients")
+@WebServlet(name="HoagieIngredientsServlet", urlPatterns="/add_ingred")
 public class HoagieIngredientsServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
-    String message = " ";
+    String message = "default";
     // Injected DAO EJB:
     @EJB HoagieDao hoagieDao;
     
@@ -59,7 +59,6 @@ public class HoagieIngredientsServlet extends HttpServlet {
             h = new HoagieIngredients(name, calories, fatCal, totFat,
                     satFat, polyFat, transFat, cholesterol, sodium,
                     potassium, carbs, fiber, sugars, protein);
-            //hoagieDao.persistIngredients(new HoagieIngredients(name));
             hoagieDao.persistIngredients(h);
             message = "Successfully wrote " + name + " to the database!";
         }
