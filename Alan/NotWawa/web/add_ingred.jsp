@@ -10,7 +10,9 @@
         <title>Add Ingredients</title>
     </head>
     <body>
+        <a href="admin.jsp">Return</a><br/>
         <h2>Add Ingredients</h2>
+ 
         <form method="POST" action="add_ingred">
             <table border="0">
                 <colgroup>

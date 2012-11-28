@@ -10,6 +10,7 @@
     </head>
  
     <body>
+        <a href="admin.jsp">Return</a><br/>
         <form method="POST" action="add_hoagie">
             Name: <input type="text" name="name" />
             <input type="submit" value="Add" />

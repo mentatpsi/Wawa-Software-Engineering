@@ -13,7 +13,7 @@
     </head>
     <body>
         <h1>Welcome to NotWawa Foodstores!</h1>
-        <a href="add_ingred.jsp">Add Ingredients</a>
-        <a href="disp_ingred.jsp">Display Ingredients</a>
+
+        
     </body>
 </html>

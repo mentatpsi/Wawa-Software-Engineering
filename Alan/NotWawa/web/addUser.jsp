@@ -12,6 +12,7 @@
     </head>
     <body>
         <h1>Add New User</h1>
+        <a href="admin.jsp">Return</a><br/>
         <form method="POST" action="EncryptServlet">
             <table border="0">
                 <colgroup>

@@ -10,7 +10,7 @@
         <title>JSP Page</title>
     </head>
     <body>
-        
+        <a href="admin.jsp">Return</a><br/>
         <form method="POST" action="disp_ingred">
             <input type="submit" value="Display Ingredients" />
         </form>
