@@ -103,12 +103,14 @@ public class EncryptServlet extends HttpServlet {
             if (hoagieDao.verifyUserExists(user)){
                 request.setAttribute("message", "Username already taken." );
                 request.getRequestDispatcher("/addUser.jsp").forward(request, response);
+            } else{
+                //store the username and hashed password in the db
+                hoagieDao.persistUserPass( new Password(user, sb.toString()) );
+                request.setAttribute("message", "User" + user + " added Successfully!" );
+                request.getRequestDispatcher("/addUser.jsp").forward(request, response);
             }
  
-            //store the hashed password in the db
-            hoagieDao.persistUserPass( new Password(user, sb.toString()) );
-            request.setAttribute("message", "User" + user + " added Successfully!" );
-            request.getRequestDispatcher("/addUser.jsp").forward(request, response);
+            
            
             
         } else if(process.equals("login")){
@@ -117,26 +119,27 @@ public class EncryptServlet extends HttpServlet {
                 out.println("User doesn't exist!");
                 request.setAttribute("message", "User does NOT exist!" );
                 request.getRequestDispatcher("/login.jsp").forward(request, response);
-            }
-            //out.println("In login");
-            
-            //verify password, else return to login
-            String check;
-            check = hoagieDao.getUserPass(user);
-            
-            if (null != check){
+            }else{
+                //verify password, else return to login
+                String check;
+                check = hoagieDao.getUserPass(user);
                 if (check.equals(sb.toString())){
                     // user and pass correct, redirect to admin page
                     session.setAttribute("LOGIN", true);       //set login session to true
                     request.setAttribute("message", user);
                     request.getRequestDispatcher("/admin.jsp").forward(request, response);
-                }
-            } else{
-                    // wrong password, send back to login screen
-                    request.setAttribute("message", "Wrong Password!" );
-                    out.println("Sb:" + sb.toString() + "check: " + check );
-                    //request.getRequestDispatcher("/login.jsp").forward(request, response);
-            } 
+                    
+                } else{
+                        // wrong password, send back to login screen
+                        request.setAttribute("message", "Wrong Password!" );
+                        //out.println("Sb:" + sb.toString() + "check: " + check );
+                        request.getRequestDispatcher("/login.jsp").forward(request, response);
+                } 
+                
+            }
+            
+            
+            
         }
         
         //request.getRequestDispatcher("/addUser.jsp").forward(request, response);
