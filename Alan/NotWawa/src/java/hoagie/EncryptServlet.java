@@ -114,25 +114,30 @@ public class EncryptServlet extends HttpServlet {
         } else if(process.equals("login")){
             //verify user exists, else return to login
             if (! hoagieDao.verifyUserExists(user)){
-                request.setAttribute("Message", "User does NOT exist!" );
+                out.println("User doesn't exist!");
+                request.setAttribute("message", "User does NOT exist!" );
                 request.getRequestDispatcher("/login.jsp").forward(request, response);
             }
+            out.println("In login");
             
             //verify password, else return to login
-            StringBuilder check;
-            check = hoagieDao.getUserPass(user, sb);
-            if (check.toString().equals(sb.toString())){
-                // user and pass correct, redirect to admin page
-                session.setAttribute("LOGIN", true);       //set login session to true
-                request.getRequestDispatcher("/admin.jsp").forward(request, response);
+            String check;
+            check = hoagieDao.getUserPass(user);
+            
+            if (null != check){
+                if (check.equals(sb.toString())){
+                    // user and pass correct, redirect to admin page
+                    session.setAttribute("LOGIN", true);       //set login session to true
+                    request.getRequestDispatcher("/admin.jsp").forward(request, response);
+                }
             } else{
-                // wrong password, send back to login screen
-                request.setAttribute("Message", "Wrong Password!" );
-                request.getRequestDispatcher("/login.jsp").forward(request, response);
-            }  
+                    // wrong password, send back to login screen
+                    request.setAttribute("message", "Wrong Password!" );
+                    request.getRequestDispatcher("/login.jsp").forward(request, response);
+            } 
         }
         
-        request.getRequestDispatcher("/addUser.jsp").forward(request, response);
+        //request.getRequestDispatcher("/addUser.jsp").forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

@@ -50,18 +50,20 @@ public class HoagieDao {
     }
     
     // Retrieves users password, returns StringBuilder
-    public StringBuilder getUserPass(String u, StringBuilder p) {
-        Query query = em.createQuery(
-            "SELECT p.password FROM Password p WHERE p.userName = :u", String.class);
-        StringBuilder c = (StringBuilder)query.getSingleResult();
-        return c;
+    public String getUserPass(String u) {
+        if(!verifyUserExists(u)){
+            return null;
+        }
+        TypedQuery<String> query = em.createQuery(
+                "SELECT p.password FROM Password p where p.userName = :u", String.class);
+        return query.setParameter("u", u).getSingleResult();
     }
     
     // verifies user exists in db, returns boolean 
     public boolean verifyUserExists(String u) {
         Query query = em.createQuery(
-            "SELECT p.userName FROM Password p", Password.class);
-        List<Password> elementList = query.getResultList();
+            "SELECT COUNT(p) FROM Password p WHERE p.userName = :u", String.class);
+        List<String> elementList = query.setParameter("u", u).getResultList();
         return elementList.isEmpty();  //boolean
     }
 }
