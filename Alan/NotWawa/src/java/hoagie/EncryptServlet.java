@@ -6,6 +6,7 @@ import java.io.PrintWriter;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.List;
+import java.util.Set;
 import javax.ejb.EJB;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -99,17 +100,16 @@ public class EncryptServlet extends HttpServlet {
         /***********************/
         if (process.equals("store")){
             //check to see if user already exists
-            boolean userExists = hoagieDao.verifyUserExists(user);
-            if (userExists){
-                request.setAttribute("Message", "Username already taken." );
+            if (hoagieDao.verifyUserExists(user)){
+                request.setAttribute("message", "Username already taken." );
                 request.getRequestDispatcher("/addUser.jsp").forward(request, response);
             }
-            
+ 
             //store the hashed password in the db
-            Password pass;
-            pass = new Password(user, sb.toString());
-            hoagieDao.persistUserPass(pass);
-            request.setAttribute("Message", "User" + user + " added Successfully!" );
+            hoagieDao.persistUserPass( new Password(user, sb.toString()) );
+            request.setAttribute("message", "User" + user + " added Successfully!" );
+            request.getRequestDispatcher("/addUser.jsp").forward(request, response);
+           
             
         } else if(process.equals("login")){
             //verify user exists, else return to login
@@ -118,7 +118,7 @@ public class EncryptServlet extends HttpServlet {
                 request.setAttribute("message", "User does NOT exist!" );
                 request.getRequestDispatcher("/login.jsp").forward(request, response);
             }
-            out.println("In login");
+            //out.println("In login");
             
             //verify password, else return to login
             String check;
@@ -128,12 +128,14 @@ public class EncryptServlet extends HttpServlet {
                 if (check.equals(sb.toString())){
                     // user and pass correct, redirect to admin page
                     session.setAttribute("LOGIN", true);       //set login session to true
+                    request.setAttribute("message", user);
                     request.getRequestDispatcher("/admin.jsp").forward(request, response);
                 }
             } else{
                     // wrong password, send back to login screen
                     request.setAttribute("message", "Wrong Password!" );
-                    request.getRequestDispatcher("/login.jsp").forward(request, response);
+                    out.println("Sb:" + sb.toString() + "check: " + check );
+                    //request.getRequestDispatcher("/login.jsp").forward(request, response);
             } 
         }
         

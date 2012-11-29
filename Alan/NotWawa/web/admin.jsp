@@ -12,8 +12,14 @@
     </head>
  
     <body bgcolor="white"  style="padding:0; margin:auto; height:100%; min-height:100%; width: 95%;">
-        
-        <h2>Welcome to the Admin Page</h2>
+        <%
+            @SuppressWarnings("unchecked") 
+            String message = (String)request.getAttribute("message");
+            if (message != null) { %>
+                <h2>Welcome, <%= message %>, to the Admin Page! </h2>  <%
+                }
+        %>
+            
         <a href="add_ingred.jsp">Add Ingredients</a><br/>
         <a href="disp_ingred.jsp">Display Ingredients</a><br/>
         <a href="add_hoagie.jsp">Add Hoagie</a><br/>

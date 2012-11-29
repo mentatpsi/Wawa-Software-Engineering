@@ -13,7 +13,7 @@
     <body>
         <h1>Add New User</h1>
         <a href="admin.jsp">Return</a><br/>
-        <form method="POST" action="EncryptServlet">
+        <form method="POST" action="addUser">
             <table border="0">
                 <colgroup>
                     <col span="1" style=" width: 150px;">

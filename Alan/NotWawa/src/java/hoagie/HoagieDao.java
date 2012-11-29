@@ -31,8 +31,8 @@ public class HoagieDao {
     }
     
     // Store a new user / password
-    public void persistUserPass(Password pass){
-        em.persist(pass);    
+    public void persistUserPass(Password p){
+        em.persist(p);    
     }
     
     // Retrieves all the hoagies:
@@ -51,19 +51,20 @@ public class HoagieDao {
     
     // Retrieves users password, returns StringBuilder
     public String getUserPass(String u) {
-        if(!verifyUserExists(u)){
+        /*if(verifyUserExists(u)){
             return null;
-        }
-        TypedQuery<String> query = em.createQuery(
-                "SELECT p.password FROM Password p where p.userName = :u", String.class);
-        return query.setParameter("u", u).getSingleResult();
+        }*/
+        TypedQuery<Password> query = em.createQuery(
+                "SELECT p FROM Password p where p.userName = :u", Password.class);
+        Password elementList = query.setParameter("u", u).getSingleResult();
+        return elementList.getPassword();
     }
     
     // verifies user exists in db, returns boolean 
     public boolean verifyUserExists(String u) {
-        Query query = em.createQuery(
-            "SELECT COUNT(p) FROM Password p WHERE p.userName = :u", String.class);
-        List<String> elementList = query.setParameter("u", u).getResultList();
-        return elementList.isEmpty();  //boolean
+        TypedQuery<Password> query = em.createQuery(
+            "SELECT p FROM Password p WHERE p.userName = :u", Password.class);
+        List<Password> c = query.setParameter("u", u).getResultList();
+        return (!c.isEmpty());  //boolean
     }
 }
