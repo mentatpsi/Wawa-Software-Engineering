@@ -30,6 +30,11 @@ public class HoagieDao {
         
     }
     
+    // Store a new HoagieMap
+    public void persistHoagieMap (HoagieMap hoagiemap){
+        em.persist(hoagiemap);
+    }
+    
     // Store a new user / password
     public void persistUserPass(Password p){
         em.persist(p);    
