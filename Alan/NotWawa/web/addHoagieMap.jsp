@@ -20,6 +20,13 @@
                     <col span="1" style=" width: 150px;">
                 </colgroup>
          
+                <!-- (1)The hoagie ID is passed into this page.
+                     (2)The list of ingredients needs to be pulled from the db and dynamically displayed here
+                        like the input box below named "1"
+                     (3)Once submitted, the servlet only grabs those fields with entries, and persists them.
+                        See the servlet AddHoagieMapServlet.java for details.
+                -->
+                
                 <tr><td></td> <td><input type="hidden" name="hoagie_id" value ="<%=request.getParameter("hId") %>"></td></tr>
                 <tr><td></td><td><input type="text" name ="1" id ="1"></td></tr>
                 
