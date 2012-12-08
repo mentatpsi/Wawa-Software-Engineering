@@ -25,5 +25,7 @@
         <a href="add_hoagie.jsp">Add Hoagie</a><br/>
         <a href="login.jsp">Login</a> (remove from here)<br/> 
         <a href="addUser.jsp">Add User</a><br/>
+        <a href="filldb.jsp">Populate the database</a><br/>
+        <a href="select_hoagie.jsp">Select a hoagie</a><br/>
     </body>
 </html>

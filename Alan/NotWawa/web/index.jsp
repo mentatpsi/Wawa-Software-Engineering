@@ -19,7 +19,7 @@
                 <col span ="1">
                 <col span ="1">
             </colgroup>
-            <tr align="center"><td><a href="select_hoagie.jsp"><img src="img/hoagie.jpg"></a></td><td><img src="img/soft_drinks.jpg"></td></tr>
+            <tr align="center"><td><a href="disp_hoagie?display=y"><img src="img/hoagie.jpg"></a></td><td><img src="img/soft_drinks.jpg"></td></tr>
             <tr align="center"><td>Build a Hoagie</td><td>Select a snack</td></tr>
         </table>
         

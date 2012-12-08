@@ -30,6 +30,18 @@ public class Hoagie implements Serializable {
     // String Representation:
     @Override
     public String toString() {
-        return name + hoagieSize + signingDate;
+        return name;
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getHoagieSize() {
+        return hoagieSize;
     }
 }

@@ -27,22 +27,21 @@
                         See the servlet AddHoagieMapServlet.java for details.
                 -->
                 
-                <tr><td></td> <td><input type="hidden" name="hoagie_id" value ="<%=request.getParameter("hId") %>"></td></tr>
-                <tr><td></td><td><input type="text" name ="1" id ="1"></td></tr>
-                
+                <tr><td></td> <td><input type="hidden" name="hoagie_id" value ="<%=request.getParameter("hID") %>"></td></tr>
+                test1
+              <%
+            @SuppressWarnings("unchecked") 
+            List<HoagieIngredients> ingredients;
+            ingredients = (List<HoagieIngredients>)request.getAttribute("ingredients");
+            if (ingredients != null) {
+                for (HoagieIngredients ingredient : ingredients) { %>
+                <tr><td><%=ingredient.getName()%></td><td><input type="text" name="<%=ingredient.getId()%>" size="4" value="0"> </td></tr>
+                    <% }
+            } %>
+
              
                 
-                <!--<tr><td>Total Fat(g) </td> <td><input type="text" name="totFat"></td></tr>
-                <tr><td>Saturated Fat(g) </td> <td><input type="text" name="satFat"></td></tr>
-                <tr><td>Polyunsaturated Fat(g) </td> <td><input type="text" name="polyFat"></td></tr>
-                <tr><td>Trans Fat(g) </td> <td><input type="text" name="transFat"></td></tr>
-                <tr><td>Cholesterol(g) </td> <td><input type="text" name="cholesterol"></td></tr>
-                <tr><td>Sodium(mg) </td> <td><input type="text" name="sodium"></td></tr>
-                <tr><td>Potassium(mg) </td> <td><input type="text" name="potassium"></td></tr>
-                <tr><td>Total Carbs(g) </td> <td><input type="text" name="carbs"></td></tr>
-                <tr><td>Fiber(g) </td> <td><input type="text" name="fiber"></td></tr>
-                <tr><td>Sugars(g) </td> <td><input type="text" name="sugars"></td></tr>
-                <tr><td>Protein(g)</td> <td> <input type="text" name="protein" ></td></tr> -->
+               
                 <tr colspan ="2"><td><input type="submit" value="Add" /></td></tr> 
             </table>   
         </form>

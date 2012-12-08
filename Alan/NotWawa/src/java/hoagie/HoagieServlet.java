@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Alan
  */
-@WebServlet(name="HoagieServlet", urlPatterns="/add_hoagie")
+@WebServlet(name="HoagieServlet", urlPatterns={"/add_hoagie", "/disp_hoagie"})
 public class HoagieServlet extends HttpServlet {
   private static final long serialVersionUID = 1L;
  
@@ -26,8 +26,13 @@ public class HoagieServlet extends HttpServlet {
             throws ServletException, IOException {
  
         // Display the list of hoagies:
-        request.setAttribute("hoagies", hoagieDao.getAllHoagies());
-        request.getRequestDispatcher("/add_hoagie.jsp").forward(request, response);
+        if (request.getParameter("display").equalsIgnoreCase("y")){
+            request.setAttribute("hoagies", hoagieDao.getAllHoagies());
+            request.getRequestDispatcher("/select_hoagie.jsp").forward(request, response);
+        }else{
+            request.setAttribute("hoagies", hoagieDao.getAllHoagies());
+            request.getRequestDispatcher("/addHoagieMap.jsp").forward(request, response);
+        }
     }
  
     @Override
@@ -35,12 +40,14 @@ public class HoagieServlet extends HttpServlet {
         HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
  
+
         // Handle a new hoagie:
         String name = request.getParameter("name");
-        if (name != null)
+        if (name != null){
             hoagieDao.persist(new Hoagie(name));
- 
+        }
         // Display the list of guests:
         doGet(request, response);
+        
     }
 }
