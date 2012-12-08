@@ -173,6 +173,24 @@ public class HoagieIngredients implements Serializable {
         this.name = name;
     }
     
+    public HoagieIngredients(String name, int calories, int carbs, int totFat,
+            int satFat, int sodium, int protein, int fiber, int transFat)
+    {
+        this.name = name;
+        this.calories = calories;
+        this.carbs = carbs;
+        this.totalFat = totFat;
+        this.satFat = satFat;
+        this.sodium = sodium;
+        this.protein = protein;
+        this.fiber = fiber;
+        this.transFat = transFat;
+        this.potassium = 0;
+        this.polyFat = 0;
+        this.cholesterol = 0;
+        this.caloriesFat = 0;
+    }
+    
     public HoagieIngredients(String name, int calories, int fatCal,
             int totFat, int satFat, int polyFat, int transFat,
             int cholesterol, int sodium, int potassium,
