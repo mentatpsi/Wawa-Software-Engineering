@@ -15,15 +15,6 @@
             Name: <input type="text" name="name" />
             <input type="submit" value="Add" />
         </form>
-        <hr><ol> <%
-            @SuppressWarnings("unchecked") 
-            List<Hoagie> hoagies = (List<Hoagie>)request.getAttribute("hoagies");
-            if (hoagies != null) {
-                for (Hoagie hoagie : hoagies) { %>
-                    <li> <%= hoagie %> </li> <%
-                }
-            } %>
-        </ol><hr>
  
      
      </body>

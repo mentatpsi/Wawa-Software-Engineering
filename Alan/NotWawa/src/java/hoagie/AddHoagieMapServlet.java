@@ -65,16 +65,15 @@ public class AddHoagieMapServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        //processRequest(request, response);
-    
-        String hId = request.getParameter("hId");
-        request.setAttribute("ingredients", hoagieDao.getAllIngredients());  // pass the page the ingredients
-        request.setAttribute("hID", hId);                                    // pass the page the selected hoagie ID
+        //processRequest(request, response);    
+        
+        // pass the page the ingredients
+        request.setAttribute("ingredients", hoagieDao.getAllIngredients());  
+        
+        // route the request to the mapping page
         request.getRequestDispatcher("/addHoagieMap.jsp").forward(request, response);
     
     }
-
-    
     
     /**
      * Handles the HTTP
@@ -90,43 +89,61 @@ public class AddHoagieMapServlet extends HttpServlet {
             throws ServletException, IOException {
         //processRequest(request, response);
         
+        // setup stream to write to page
         response.setContentType("text/html");
-        PrintWriter out = response.getWriter();
+        PrintWriter out = response.getWriter();        
         
-        //convert the rest to ints
-        String hId = request.getParameter("hoagie_id");
-        int id = Integer.parseInt(hId);
-        //out.println(id);
+        // get the parameter
+        String param = request.getParameter("parameter");
         
-        // get all parameter names
-        Enumeration paramNames = request.getParameterNames();
-        
-        out.println("Hoagie added!<br/>");
-        out.println("Hoagie_id = " + hId +"<br/>");
-        
-        //loop through parameters
-        while(paramNames.hasMoreElements()){
-            //get next element in the enumeration
-            String currentParamName = (String) paramNames.nextElement();
-            
-            //hack to skip first parameter name, the rest are ints
-            if (! "hoagie_id".equalsIgnoreCase(currentParamName)){
-                // get values
-                int ingredientId = Integer.parseInt(currentParamName);
-                int quantity = Integer.parseInt(request.getParameter(currentParamName));
-                
-                // create the object
-                HoagieMap hoagieMap = new HoagieMap(id, ingredientId, quantity);
-                
-                //Only persist if the quantity > 0
-                if (quantity > 0){
-                    hoagieDao.persistHoagieMap(hoagieMap);
-                    out.println("ingredientID = " + currentParamName + ", quantity = " + request.getParameter(currentParamName) +"<br/>");
-                }
+        // if no parameter, just dump into a GET
+        // for instance, when /add_hoagie links to this servlet
+        // it's via POST, passing the hoagie id (hId)        
+        if (request.getParameter("hoagie_id") != null){
+
+            //we are storing the maps
+
+            //get the hoagie_id
+            int hid = Integer.parseInt(request.getParameter("hoagie_id"));
+            //out.println(id);
+
+            // get all parameter names
+            Enumeration paramNames = request.getParameterNames();
+
+            // begin response to screen
+            out.println("Hoagie added!<br/>");
+            out.println("Hoagie_id = " + hid +"<br/>");
+
+            //loop through parameters
+            while(paramNames.hasMoreElements()){
+                //get next element in the enumeration
+                String currentParamName = (String) paramNames.nextElement();
+
+                //hack to skip first parameter name (string), the rest are ints
+                if (! "hoagie_id".equalsIgnoreCase(currentParamName)){
+                    // get values
+                    int ingredientId = Integer.parseInt(currentParamName);
+                    int quantity = Integer.parseInt(request.getParameter(currentParamName));
+
+                    // create the object
+                    HoagieMap hoagieMap = new HoagieMap(hid, ingredientId, quantity);
+
+                    //Only persist if the quantity > 0
+                    if (quantity > 0){
+                        hoagieDao.persistHoagieMap(hoagieMap);
+                        out.println("ingredientID = " + currentParamName + ", quantity = " + request.getParameter(currentParamName) +"<br/>");
+                    } 
+                } 
             }
+            // route the request to the hoagie display page
+            request.getRequestDispatcher("/DisplayHoagieServlet?hId=" + request.getParameter("hoagie_id")).forward(request, response);
             
+        }else{
+            // just pass through if we aren't storing the map objects
+            doGet(request, response);
             
-       }
+        }
+
     }
 
     /**

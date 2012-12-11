@@ -48,11 +48,31 @@ public class HoagieDao {
         return query.getResultList();
     }
     
+    public Hoagie getHoagiebyId(int hid){
+        // Return a hoagie object by its known id
+        // get SingleResult() assumes no duplicates in db
+        
+        TypedQuery<Hoagie> query = em.createQuery(
+                "SELECT h FROM Hoagie h WHERE h.id = :hid", Hoagie.class);
+        return query.setParameter("hid", hid).getSingleResult();
+                
+    }
+    
+    public Hoagie getHoagieByName(String hoagieName){
+        // Return a hoagie object by hoagieName
+        // getSingleResult() assumes there are no duplicates in the db
+        
+        TypedQuery<Hoagie> query = em.createQuery(
+                "SELECT h FROM Hoagie h WHERE h.name = :hoagieName", Hoagie.class);      
+        return query.setParameter("hoagieName", hoagieName).getSingleResult();
+    }
+    
     public List<HoagieMap> getMapForHoagie(int hoag) {
+        // get all hoagie map ingredients that match a certain hoagie id
+        
         TypedQuery<HoagieMap> query = em.createQuery(
             "SELECT hm FROM HoagieMap hm where hm.hoagie_id = :hoag", HoagieMap.class);
-        
-        return query.getResultList(); 
+        return query.setParameter("hoag", hoag).getResultList(); 
     }
     
     public HoagieIngredients getTotal(int hoag) {
@@ -98,7 +118,7 @@ public class HoagieDao {
             TypedQuery<HoagieIngredients> ingrQuery = em.createQuery(
             "SELECT hi FROM HoagieIngredients hi where hi.id = :curIngr", HoagieIngredients.class);
             
-            hIngrs.add(ingrQuery.getSingleResult());
+            hIngrs.add(ingrQuery.setParameter("curIngr", curIngr).getSingleResult());
         }
         return hIngrs;
     }

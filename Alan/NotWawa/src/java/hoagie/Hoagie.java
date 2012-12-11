@@ -34,7 +34,7 @@ public class Hoagie implements Serializable {
     }
 
     public long getId() {
-        return id;
+        return this.id;
     }
 
     public String getName() {

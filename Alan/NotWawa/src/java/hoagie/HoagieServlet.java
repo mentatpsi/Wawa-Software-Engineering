@@ -1,8 +1,8 @@
 package hoagie;
  
 import java.io.IOException;
+import java.io.PrintWriter;
 import javax.ejb.EJB;
-import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -19,19 +19,27 @@ public class HoagieServlet extends HttpServlet {
  
     // Injected DAO EJB:
     @EJB HoagieDao hoagieDao;
+    
+
  
     @Override
     protected void doGet(
         HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
- 
+        
+        // setup stream to write to page
+        response.setContentType("text/html");
+        PrintWriter out = response.getWriter();
+
+        String display = request.getParameter("display");
+        
         // Display the list of hoagies:
-        if (request.getParameter("display").equalsIgnoreCase("y")){
+        if (display != null){
             request.setAttribute("hoagies", hoagieDao.getAllHoagies());
             request.getRequestDispatcher("/select_hoagie.jsp").forward(request, response);
         }else{
-            request.setAttribute("hoagies", hoagieDao.getAllHoagies());
-            request.getRequestDispatcher("/addHoagieMap.jsp").forward(request, response);
+            // route to add_hoagie.jsp
+            request.getRequestDispatcher("/add_hoagie.jsp").forward(request, response);
         }
     }
  
@@ -39,15 +47,41 @@ public class HoagieServlet extends HttpServlet {
     protected void doPost(
         HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
- 
-
+        
+        // setup stream to write to page
+        response.setContentType("text/html");
+        PrintWriter out = response.getWriter();
+        
         // Handle a new hoagie:
         String name = request.getParameter("name");
+        
+        //out.println(name);
         if (name != null){
+            // persist hoagie
             hoagieDao.persist(new Hoagie(name));
+
+            // we just persisted a hoagie, send it to the hoagieMapServlet
+            // to add ingredients to the hoagie
+            
+            //get parameter
+            String hName;
+            hName = request.getParameter("name");
+            //out.println(hName);
+            
+            //get the hoagie from the db
+            Hoagie myHoagie = hoagieDao.getHoagieByName(hName);
+            
+            //grab its ID
+            String hid = Integer.toString((int) myHoagie.getId());
+            
+            //out.println(hid);
+            
+            //pass the hoagie id to the map servlet (which calls addHoagieMap.jsp)
+            request.getRequestDispatcher("/addHoagieMap?hId="+hid).forward(request, response);
         }
+        
         // Display the list of guests:
-        doGet(request, response);
+        //doGet(request, response);
         
     }
 }

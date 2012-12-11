@@ -20,9 +20,9 @@
                 }
         %>
             
-        <a href="add_ingred.jsp">Add Ingredients</a><br/>
-        <a href="disp_ingred.jsp">Display Ingredients</a><br/>
-        <a href="add_hoagie.jsp">Add Hoagie</a><br/>
+        <a href="add_ingred">Add New Ingredient</a><br/>
+        <a href="disp_ingred">Display All Ingredients</a><br/>
+        <a href="add_hoagie">Add New Hoagie</a><br/>
         <a href="login.jsp">Login</a> (remove from here)<br/> 
         <a href="addUser.jsp">Add User</a><br/>
         <a href="filldb.jsp">Populate the database</a><br/>

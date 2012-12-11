@@ -10,10 +10,9 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
     </head>
-    <body>
+    <body bgcolor ="black" text="white">
         <h1>Please Select Hoagie Type</h1>
         
-         <a href="admin.jsp">Return</a><br/>
          
         <hr><ol> <%
             @SuppressWarnings("unchecked") 
@@ -21,7 +20,7 @@
             if (hoagies != null) {
                 //create link to nutritionLabel, and pass the hoagie id to it.
                 for (Hoagie hoagie : hoagies) { %>
-                    <li> <a href="nutritionLabel.jsp?hId="<%= hoagie.getId() %>"><%= hoagie.getName() %> </li> <%
+                    <li> <a href="DisplayHoagieServlet?hId=<%= hoagie.getId() %>"><%= hoagie.getName() %> </li> <%
                 }
             } %>
         </ol><hr>
