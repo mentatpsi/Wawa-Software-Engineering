@@ -16,6 +16,7 @@ public class Hoagie implements Serializable {
     private String name;
     private Date signingDate;
     private String hoagieSize;
+    private String Url;
  
     // Constructors:
     public Hoagie() {
@@ -43,5 +44,19 @@ public class Hoagie implements Serializable {
 
     public String getHoagieSize() {
         return hoagieSize;
+    }
+
+    /**
+     * @return the Url
+     */
+    public String getUrl() {
+        return Url;
+    }
+
+    /**
+     * @param Url the Url to set
+     */
+    public void setUrl(String Url) {
+        this.Url = Url;
     }
 }

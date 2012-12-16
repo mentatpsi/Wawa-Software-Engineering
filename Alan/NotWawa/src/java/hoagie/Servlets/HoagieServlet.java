@@ -1,5 +1,7 @@
-package hoagie;
+package hoagie.Servlets;
  
+import hoagie.Hoagie;
+import hoagie.HoagieDao;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.ejb.EJB;

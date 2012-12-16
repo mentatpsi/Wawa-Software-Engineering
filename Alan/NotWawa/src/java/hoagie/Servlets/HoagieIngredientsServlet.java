@@ -2,8 +2,10 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package hoagie;
+package hoagie.Servlets;
 
+import hoagie.HoagieDao;
+import hoagie.HoagieIngredients;
 import java.io.IOException;
 import javax.ejb.EJB;
 import javax.servlet.ServletException;

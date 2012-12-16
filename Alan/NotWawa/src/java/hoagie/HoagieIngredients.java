@@ -1,6 +1,9 @@
 package hoagie;
 
 import java.io.Serializable;
+import java.lang.reflect.Field;
+import java.util.HashMap;
+import java.util.Map;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -28,6 +31,29 @@ public class HoagieIngredients implements Serializable {
     private int fiber;
     private int sugars;
     private int protein;
+ 
+    
+    public Map getFields(){
+        Map<String, Integer> mp=new HashMap<String, Integer>();
+        mp.put("Calories", this.getCalories() );
+        mp.put("Calories from Fat", this.getCaloriesFat() );
+        mp.put("Total Fat", this.getTotalFat() );
+        mp.put("Saturated Fat", this.getSatFat() );
+        mp.put("Monounsaturated Fat", this.getMonoFat() );
+        mp.put("Polyunsaturated Fat", this.getPolyFat() );
+        mp.put("Trans Fat", this.getTransFat() );
+        mp.put("Cholesterol", this.getCholesterol() );
+        mp.put("Sodium", this.getSodium() );
+        mp.put("Potassium", this.getPotassium() );
+        mp.put("Carbohydrates", this.getCarbs() );
+        mp.put("Fiber", this.getFiber() );
+        mp.put("Sugars", this.getSugars() );
+        mp.put("Protein", this.getProtein() );
+        
+        
+        return mp;
+        
+    }
     
     public String getName() {
         return name;

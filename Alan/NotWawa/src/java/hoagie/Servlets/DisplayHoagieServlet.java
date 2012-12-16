@@ -2,11 +2,16 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package hoagie;
+package hoagie.Servlets;
 
+import hoagie.Hoagie;
+import hoagie.HoagieDao;
+import hoagie.HoagieIngredients;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.lang.reflect.Field;
 import java.util.List;
+import java.util.Map;
 import javax.ejb.EJB;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -72,8 +77,19 @@ public class DisplayHoagieServlet extends HttpServlet {
         // get all map objects that have the same hoagie id
         List<HoagieIngredients> hIngrs = hoagieDao.getIngrsForHoagie(hID);
         
-        // pass the list of ingredients to the page
-        request.setAttribute("ingredients", hIngrs);
+        //get totals for hoagie
+        HoagieIngredients hTotal= hoagieDao.getTotal(hID);
+        
+        //get all declared fields of hTotal
+        Map<String, Integer> field;
+        field = hTotal.getFields();
+            
+        
+        
+        // pass items to the page
+        request.setAttribute("fields", field); // list of fields
+        request.setAttribute("ingredients", hIngrs);  //list of ingredients
+        request.setAttribute("hTotal", hTotal); // totals
         
         // redirect to the page
         request.getRequestDispatcher("/dispHoagie.jsp?hoagieName=" + name).forward(request, response);

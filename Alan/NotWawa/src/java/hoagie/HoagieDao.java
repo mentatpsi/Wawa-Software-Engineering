@@ -10,6 +10,9 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
 
 
 @Stateless
@@ -76,37 +79,79 @@ public class HoagieDao {
     }
     
     public HoagieIngredients getTotal(int hoag) {
-        List<HoagieIngredients> hingrs = this.getIngrsForHoagie(hoag);
-        HoagieIngredients hoagieIngr = new HoagieIngredients();
+        List<HoagieIngredients> hingrs = this.getIngrsForHoagie(hoag); //get ingredients for this hoagie
+        HoagieIngredients hoagieIngr = new HoagieIngredients();  //create new ingredients object (for totals)
+        List<HoagieMap> hMaps = this.getMapForHoagie(hoag); //get the hoagie map
+        
         int calories = 0;
         int totalFat = 0;
         int saturatedFat = 0;
         int carbs = 0;
         int fiber = 0;
         int protein = 0;
+        int sugars = 0;
+        int caloriesFat = 0;
+        int monoFat = 0;
+        int polyFat = 0;
+        int transFat = 0;
+        int cholesterol = 0;
+        int sodium = 0;
+        int potassium = 0;
+        
+        long idx;
+        int quantity;
         
         
-        for (HoagieIngredients hIngr : hingrs) {
-            calories+= hIngr.getCalories();
-            totalFat+= hIngr.getTotalFat();
-            saturatedFat+= hIngr.getSatFat();
-            carbs+= hIngr.getCarbs();
-            fiber+= hIngr.getFiber();
-            protein+= hIngr.getProtein();
-            
-            
+        // make a map of ingredient_id:quantity
+        Map<Integer, Integer> mp=new HashMap<Integer, Integer>();       
+        for (HoagieMap hMap : hMaps){
+            mp.put(hMap.getIngredient_id(), hMap.getQuantity());  
         }
         
+        // sum nutritional information across all ingredients
+        for (Iterator<HoagieIngredients> it = hingrs.iterator(); it.hasNext();) {
+            HoagieIngredients hIngr = it.next();
+            
+            //get the quantity of this particular ingredient (4 slices of cheese, etc)
+            idx = hIngr.getId();
+            quantity = mp.get((int)idx);
+            
+            // start the summing and multiplying by quantity
+            calories+= hIngr.getCalories() * quantity;
+            totalFat+= hIngr.getTotalFat() * quantity;
+            saturatedFat+= hIngr.getSatFat() * quantity;
+            carbs+= hIngr.getCarbs() * quantity;
+            fiber+= hIngr.getFiber() * quantity;
+            protein+= hIngr.getProtein() * quantity;
+            sugars+= hIngr.getSugars() * quantity;
+            caloriesFat+= hIngr.getCalories() * quantity;
+            monoFat+= hIngr.getMonoFat() * quantity;
+            polyFat+= hIngr.getPolyFat() * quantity;
+            transFat+= hIngr.getTransFat() * quantity;
+            cholesterol+= hIngr.getCholesterol() * quantity;
+            sodium+= hIngr.getSodium() * quantity;
+            potassium+= hIngr.getPotassium() * quantity;
+        }
+   
+        //set the sums in the new hoagie ingredient object
         hoagieIngr.setCalories(calories);
         hoagieIngr.setCarbs(carbs);
         hoagieIngr.setFiber(fiber);
         hoagieIngr.setSatFat(saturatedFat);
         hoagieIngr.setProtein(protein);
-        
-        hoagieIngr.setId(Long.getLong(String.valueOf(hoag))); //TODO: Might be goot to give a value
+        hoagieIngr.setSugars(sugars);
+        hoagieIngr.setCaloriesFat(caloriesFat);
+        hoagieIngr.setMonoFat(monoFat);
+        hoagieIngr.setPolyFat(polyFat);
+        hoagieIngr.setTransFat(transFat);
+        hoagieIngr.setCholesterol(cholesterol);
+        hoagieIngr.setSodium(sodium);
+        hoagieIngr.setPotassium(potassium);      
+        hoagieIngr.setId(Long.getLong(String.valueOf(hoag))); //TODO: Might be good to give a value
         
         return hoagieIngr;
     }
+
 
     
     public List<HoagieIngredients> getIngrsForHoagie(int hoag) {

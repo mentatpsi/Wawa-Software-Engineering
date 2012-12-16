@@ -2,8 +2,12 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package hoagie;
+package hoagie.Servlets;
 
+import hoagie.Hoagie;
+import hoagie.HoagieDao;
+import hoagie.HoagieIngredients;
+import hoagie.Password;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -72,6 +76,7 @@ public class FillDBServlet extends HttpServlet {
 
             }
             streamIngredients.close();
+            
             //fills the Database with hoagies by reading Hoagie.csv file
             fileName = "/WEB-INF/Hoagie.csv";
             text = "";
@@ -85,9 +90,16 @@ public class FillDBServlet extends HttpServlet {
                 hoagieDao.persist(hoagie);
 
             }
+            
+            // add a "testing" user to the db
+            Password user1 = new Password("test", "a94a8fe5ccb19ba61c4c0873d391e987982fbbd3");
+            hoagieDao.persistUserPass(user1);
+            
+            //cleanup
             filled = true;
             streamHoagie.close();
         }
+        
         message = "!!!The database has been populated!!!";
         doGet(request, response);
     }

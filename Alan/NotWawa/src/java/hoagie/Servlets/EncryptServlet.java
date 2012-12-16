@@ -1,6 +1,8 @@
 
-package hoagie;
+package hoagie.Servlets;
 
+import hoagie.HoagieDao;
+import hoagie.Password;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.security.MessageDigest;
@@ -16,7 +18,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 
-@WebServlet(name = "EncryptServlet", urlPatterns={"/addUser", "/login"})
+@WebServlet(name = "EncryptServlet", urlPatterns={"/addUser", "/login", "/logout"})
 public class EncryptServlet extends HttpServlet {
 
     // Injected DAO EJB:
@@ -126,6 +128,7 @@ public class EncryptServlet extends HttpServlet {
                 if (check.equals(sb.toString())){
                     // user and pass correct, redirect to admin page
                     session.setAttribute("LOGIN", true);       //set login session to true
+                    session.setAttribute("USER", user);
                     request.setAttribute("message", user);
                     request.getRequestDispatcher("/admin.jsp").forward(request, response);
                     
@@ -141,8 +144,6 @@ public class EncryptServlet extends HttpServlet {
             
             
         }
-        
-        //request.getRequestDispatcher("/addUser.jsp").forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -158,18 +159,21 @@ public class EncryptServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        
+        //check if user clicked "logout"
+        if (request.getParameter("logout").equals("y")){
+            HttpSession session = request.getSession(false); 
+            
+            //make sure a session exists
+            if(session != null){
+                session.invalidate();
+                request.getRequestDispatcher("/login.jsp").forward(request,response);
+            }
+        }
         processRequest(request, response);
     }
 
-    /**
-     * Handles the HTTP
-     * <code>POST</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
+
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
