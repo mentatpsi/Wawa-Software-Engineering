@@ -175,6 +175,13 @@ public class HoagieDao {
         return query.getResultList();
     }
     
+    public List<HoagieMap> getAllHoagieMaps() {
+        TypedQuery<HoagieMap> query = em.createQuery(
+            "SELECT hm FROM HoagieMap hm", HoagieMap.class);
+        return query.getResultList();
+    }
+    
+    
     // Retrieves users password, returns StringBuilder
     public String getUserPass(String u) {
         /*if(verifyUserExists(u)){
@@ -184,6 +191,15 @@ public class HoagieDao {
                 "SELECT p FROM Password p where p.userName = :u", Password.class);
         Password elementList = query.setParameter("u", u).getSingleResult();
         return elementList.getPassword();
+    }
+    
+    public HoagieIngredients getIngrByName(String ingrName){
+        // Return a hoagieIngredient object by hoagieIngredientName
+        // getSingleResult() assumes there are no duplicates in the db
+        
+        TypedQuery<HoagieIngredients> query = em.createQuery(
+                "SELECT hi FROM HoagieIngredients hi WHERE hi.name = :ingrName", HoagieIngredients.class);      
+        return query.setParameter("ingrName", ingrName).getSingleResult();
     }
     
     // verifies user exists in db, returns boolean 

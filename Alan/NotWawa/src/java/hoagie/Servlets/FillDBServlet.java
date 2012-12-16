@@ -8,6 +8,7 @@ import hoagie.Hoagie;
 import hoagie.HoagieDao;
 import hoagie.HoagieIngredients;
 import hoagie.Password;
+import hoagie.HoagieMap;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -90,14 +91,46 @@ public class FillDBServlet extends HttpServlet {
                 hoagieDao.persist(hoagie);
 
             }
+            streamHoagie.close(); // cleanup
+            
+            //make hoagie maps
+            fileName = "/WEB-INF/Hoagie_Ingredients.csv";
+            text = "";
+            InputStream streamMap = context.getResourceAsStream(fileName);
+            InputStreamReader isrMap = new InputStreamReader(streamMap);
+            BufferedReader readerMap = new BufferedReader(isrMap);
+            while ((text = readerMap.readLine()) != null){
+                String[] strings = text.split(",");
+                
+                //get the hoagie & its ID
+                Hoagie hoag = hoagieDao.getHoagieByName(strings[0]);
+                long hoagId= hoag.getId();  // get hoagie id
+                
+                long ingrId;
+                int quantity;
+                HoagieIngredients hIngObj;
+                
+                
+                for(int i = 1; i < strings.length; i+=2){
+                    //get the ingredients object
+                    hIngObj = hoagieDao.getIngrByName(strings[i]);
+                    //get the id of the ingredient
+                    ingrId = hIngObj.getId();
+                    quantity = Integer.parseInt(strings[i+1]); //quantity
+                    HoagieMap hm = new HoagieMap( (int)hoagId, (int)ingrId, quantity );
+                    hoagieDao.persistHoagieMap(hm);
+                }
+            }
+            streamMap.close();
             
             // add a "testing" user to the db
             Password user1 = new Password("test", "a94a8fe5ccb19ba61c4c0873d391e987982fbbd3");
             hoagieDao.persistUserPass(user1);
             
+            
             //cleanup
             filled = true;
-            streamHoagie.close();
+            
         }
         
         message = "!!!The database has been populated!!!";

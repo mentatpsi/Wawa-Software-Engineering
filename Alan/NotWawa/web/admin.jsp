@@ -31,5 +31,6 @@
         <a href="addUser.jsp">Add User</a><br/>
         <a href="filldb.jsp">Populate the database</a><br/>
         <a href="disp_hoagie?display=y">Select a hoagie</a><br/>
+        <a href="DisplayHoagieMap">Display all HoagieMap(s)</a><br/>
     </body>
 </html>
